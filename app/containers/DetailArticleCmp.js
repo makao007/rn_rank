@@ -67,14 +67,14 @@ class DetailArticleCmp extends React.Component {
                   <TouchableHighlight underlayColor="rgba(34, 26, 38, 0.1)" onPress={()=>this._onBackClick(navigator)}>
                     <Image style = {styles.iconImage} source = {require('../../images/icon_back.png')}></Image>
                   </TouchableHighlight>
-                  <Text style = {styles.headerText}>{rowData.desc}</Text>
+                  <Text style = {styles.headerText}>{rowData.title}</Text>
                 </View>
                 <Animated.View style = {{height: 2, backgroundColor: '#27B5EE', width: this.state.progressValue}}>
                 </Animated.View>
                 <WebView
                   ref = 'webview'
                   style = {{flex:1}}
-                  source = {{uri: rowData.url}}
+                  source = {{uri: rowData.link}}
                   onNavigationStateChange  = {(navState) => this._onNavigationStateChange (navState)}
                   onLoadEnd  = {() => this._onLoadEnd () }
                   renderLoading = {() => this._renderLoading()}

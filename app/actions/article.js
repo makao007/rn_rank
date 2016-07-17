@@ -1,22 +1,22 @@
 import * as types from '../constants/ActionTypes';
+import * as info  from '../constants/APP_INFO';
 
-export function fetchArticles(category = 'Android', index = 1, isLoadMore, nowRead) {
+export function fetchArticles(category = 'Android', index = 0, isLoadMore, nowRead) {
 	return dispatch => {
 		if(!isLoadMore){
 			dispatch(fetchArticleList(category));
 		}
-		let URL = `http://gank.io/api/data/${category}/10/${index}`;
+		let URL = `${info.APP_API_ARTICLE_LIST_URL}/${category}/${info.APP_API_AMOUNT_PER_PAGE}/${index*info.APP_API_AMOUNT_PER_PAGE}`;
 		console.log(URL);
     fetch(URL).then(response => response.json())
       .then(responseData => {
-        console.log(responseData);
 					if(!isLoadMore){
 						dispatch(receiveArticleList(responseData,category));
 					} else {
 						dispatch(receiveArticleListMore(responseData, category, nowRead));
 					}
       }).catch((error) => {
-			 		console.log('error');
+			 		console.log('error', error);
 			}).done();
 	}
 }

@@ -16,6 +16,8 @@ import React, {
 import RequestBuilder from '../http/RequestBuilder';
 import {fetchArticles} from '../actions/article';
 import DetailArticleCmp from './DetailArticleCmp';
+import * as info from '../constants/APP_INFO';
+
 class ArticleList extends React.Component {
 
   constructor(props) {
@@ -30,6 +32,8 @@ class ArticleList extends React.Component {
   render() {
     const {dispatch, read, category} = this.props;
     let nowRead;
+    nowRead = read[info.categoryIndex(category)];
+    /*
     switch (category) {
       case 'Android':
         nowRead = read[0];
@@ -40,6 +44,8 @@ class ArticleList extends React.Component {
       default:
         nowRead = read[2];
     }
+    */
+    // console.log (nowRead);
     let isFirstLoaded = nowRead.articleList.length != 0;
     return(
 
@@ -104,10 +110,10 @@ class ArticleList extends React.Component {
             style = {{height:80,width:120}}
           />*/}
           <View style={{marginLeft:10,flex:1}}>
-            <Text style={{fontSize: 15,fontWeight: 'bold',color:'black'}}>{rowData.desc}</Text>
+            <Text style={{fontSize: 15,fontWeight: 'bold',color:'black'}}>{rowData.title}</Text>
             <View style={{marginTop: 4, justifyContent: 'space-between', flexDirection: 'row'}}>
-              <Text style={{}}>{'作者：' + rowData.who}</Text>
-              <Text style={{}}>{this._formatDate(rowData.publishedAt)}</Text>
+              <Text style={{}}>{info.APP_TEXT_AUTHOR + rowData.author}</Text>
+              <Text style={{}}>{rowData.pubdate}</Text>
             </View>
           </View>
         </View>
@@ -142,7 +148,7 @@ class ArticleList extends React.Component {
     } else {
       return (
         <View style={styles.progress}>
-          <Text style={{color: 'rgba(0, 0, 0, 0.3)'}}>数据已结加载完了- -|||</Text>
+          <Text style={{color: 'rgba(0, 0, 0, 0.3)'}}>{info.APP_TEXT_OVER}</Text>
         </View>
       );
     }

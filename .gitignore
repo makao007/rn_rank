@@ -34,3 +34,6 @@ node_modules/
 npm-debug.log
 
 *.jks
+AndroidAssets
+android/app/my-release-key.keystore
+android/main.js

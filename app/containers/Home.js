@@ -18,6 +18,7 @@ import ScrollableTabView  from 'react-native-scrollable-tab-view';
 import ArticleList from './ArticleList';
 import AboutCmp from './AboutCmp';
 import BeautyCmp from './BeautyCmp';
+import * as info from '../constants/APP_INFO';
 class Home extends React.Component {
 
   constructor(props) {
@@ -99,25 +100,31 @@ class Home extends React.Component {
     let navigationView = (
       <View style = {styles.container}>
         <Image style = {styles.headerImage} source = {require('../../images/bg_drawer_header.png')} >
-          <Text  style = {styles.titleText}>技术干货&&福利</Text>
+          <Text  style = {styles.titleText}>{info.APP_SIDE_TITLE}</Text>
         </Image>
         <TouchableHighlight underlayColor = "rgba(34, 26, 38, 0.1)" onPress={() => this._onHomeClick()}>
           <View style = {styles.item}>
             <Image style = {styles.iconHomeImage} source = {require('../../images/icon_home.png')}>
             </Image>
-            <Text style = {styles.itemText}>首页</Text>
+            <Text style = {styles.itemText}>{info.APP_SIDE_MENU1}</Text>
           </View>
         </TouchableHighlight>
         <TouchableHighlight style = {{marginTop: 10}} underlayColor = "rgba(34, 26, 38, 0.1)" onPress={() => this._onBeautyClick(this.props)}>
           <View style = {styles.item}>
             <Image style = {styles.iconHomeImage} source = {require('../../images/icon_beautiful.png')}></Image>
-            <Text style = {styles.itemText}>福利</Text>
+            <Text style = {styles.itemText}>{info.APP_SIDE_MENU2}</Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight style = {{marginTop: 10}} underlayColor = "rgba(34, 26, 38, 0.1)" onPress={() => this._onBeautyClick(this.props)}>
+          <View style = {styles.item}>
+            <Image style = {styles.iconHomeImage} source = {require('../../images/icon_beautiful.png')}></Image>
+            <Text style = {styles.itemText}>{info.APP_SIDE_MENU3}</Text>
           </View>
         </TouchableHighlight>
         <TouchableHighlight style = {{marginTop: 10}} underlayColor = "rgba(34, 26, 38, 0.1)" onPress={() => this._onAboutClick(this.props)}>
           <View style = {styles.item}>
             <Image style = {styles.iconHomeImage} source = {require('../../images/icon_about.png')}></Image>
-            <Text style = {styles.itemText}>关于</Text>
+            <Text style = {styles.itemText}>{info.APP_SIDE_MENU4}</Text>
           </View>
         </TouchableHighlight>
       </View>
@@ -137,13 +144,13 @@ class Home extends React.Component {
               <TouchableHighlight underlayColor="rgba(34, 26, 38, 0.1)" onPress={()=>this._onMenuClick()}>
                 <Image style = {styles.iconImage} source = {require('../../images/ic_menu.png')}></Image>
               </TouchableHighlight>
-              <Text style = {styles.headerText}>干货分享</Text>
+              <Text style = {styles.headerText}>{info.APP_TITLE}</Text>
             </View>
             <ScrollableTabView style = {{flex: 1}} tabBarUnderlineColor = "white"
                                tabBarInactiveTextColor = "#F2F2F2" tabBarBackgroundColor = "#27B5EE" tabBarActiveTextColor = "white">
-              <ArticleList category = 'Android' tabLabel = "安卓" {...this.props}></ArticleList>
-              <ArticleList category = 'iOS' tabLabel = "苹果" {...this.props}></ArticleList>
-              <ArticleList category = '拓展资源' tabLabel = "拓展" {...this.props}></ArticleList>
+              { info.API_MENUS.map( (x) => {
+                return <ArticleList category = {x.category} key={x.category} tabLabel = {x.name} {...this.props}></ArticleList>
+              }) }
             </ScrollableTabView>
           </View>
         </Drawer>
@@ -160,13 +167,13 @@ class Home extends React.Component {
               <TouchableHighlight underlayColor="rgba(34, 26, 38, 0.1)" onPress={()=>this._onMenuClick()}>
                 <Image style = {styles.iconImage} source = {require('../../images/ic_menu.png')}></Image>
               </TouchableHighlight>
-              <Text style = {styles.headerText}>干货分享</Text>
+              <Text style = {styles.headerText}>{info.APP_TITLE}</Text>
             </View>
             <ScrollableTabView style = {{flex: 1}} tabBarUnderlineColor = "white"
               tabBarInactiveTextColor = "#F2F2F2" tabBarBackgroundColor = "#27B5EE" tabBarActiveTextColor = "white">
-              <ArticleList category = 'Android' tabLabel = "安卓" {...this.props}></ArticleList>
-              <ArticleList category = 'iOS' tabLabel = "苹果" {...this.props}></ArticleList>
-              <ArticleList category = '拓展资源' tabLabel = "拓展" {...this.props}></ArticleList>
+              { info.API_MENUS.map( (x) => {
+                return <ArticleList category = {x.category} key={x.category} tabLabel = {x.name} {...this.props}></ArticleList>
+              }) }
             </ScrollableTabView>
           </View>
         </DrawerLayoutAndroid>
